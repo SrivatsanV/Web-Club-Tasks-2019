@@ -1,0 +1,94 @@
+﻿@page "/fetchdata"
+@inject HttpClient Http
+@inject IJSRuntime JsRuntime;
+@using Microsoft.JSInterop
+@using Microsoft.AspNetCore.Components
+@inject IComponentContext ComponentContext
+
+<h1>Majestic Millions!</h1>
+
+<p>This component demonstrates Lazy Loading or Infintite Scrolling.</p>
+
+@if (arr == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>TLD-Rank</th>
+                <th>RefSubnets</th>
+                <th>RefIPs</th>
+                <th>IDN_Domain</th>
+                <th>IDN_TLD</th>
+                <th>PrevRank</th>
+                <th>PrevTLD-Rank</th>
+                <th>PrevRefSubnets</th>
+                <th>PrevRefIPs</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var data in arr)
+            {
+                <tr>
+                    <td>@data.GlobalRank</td>
+                    <td>@data.TldRank</td>
+                    <td>@data.RefSubNets</td>
+                    <td>@data.RefIPs</td>
+                    <td>@data.IDN_Domain</td>
+                    <td>@data.IDN_TLD</td>
+                    <td>@data.PrevGlobalRank</td>
+                    <td>@data.PrevTldRank</td>
+                    <td>@data.PrevRefSubNets</td>
+                    <td>@data.PrevRefIPs</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+@code {
+
+    Millions[] arr;
+
+    protected override async Task OnInitializedAsync()
+    {
+            arr = await Http.GetJsonAsync<Millions[]>("http://localhost:8080/0/14");
+    }
+     protected override async Task OnAfterRenderAsync()
+    {
+         if (!ComponentContext.IsConnected)
+        {
+            return;
+        }
+        if(arr!=null){
+            await JsRuntime.InvokeAsync<int>("AppendData");
+        }
+    }
+
+    public class Millions
+    {
+        public string GlobalRank {get;set;}
+
+        public string TldRank {get;set;}
+         
+        public string RefSubNets {get;set;}
+
+        public string RefIPs {get;set;}
+
+        public string IDN_Domain {get;set;}
+
+        public string IDN_TLD {get;set;}
+
+        public string PrevGlobalRank {get;set;}
+
+        public string PrevTldRank {get;set;}
+         
+        public string PrevRefSubNets {get;set;}
+
+        public string PrevRefIPs {get;set;}
+    }
+}

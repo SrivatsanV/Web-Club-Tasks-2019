@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Blazor_App</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <app>Loading...</app>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+
+    <script>
+        window.AppendData = () => {
+            var $win = $(window),
+                $table = $('.table'), // table
+                lazyPoint = 0, // point to call next ajax
+                offset = 14, // number of last table row
+                count = 14, // number of rows to load with one request
+                loading = false; // flag to prevent more than 1 loading at a time
+
+            // this function will calc next Y coordinate
+            // then you reach it, addsome new table data
+            function calcLazyPoint() {
+                var top = $table.offset().top;
+                var height = $table.outerHeight();
+                lazyPoint = top + height;
+            }
+
+            // add loaded data to table
+            function addToTable(obj) {
+
+                var html = "";//the html storing the rows
+
+                for (let i = 0; i < obj.length; i++) {
+                    const newData = obj[i];
+
+                    var row = "<tr><td>" + newData.GlobalRank + "</td>"
+                        + "<td>" + newData.TldRank + "</td>"
+                        + "<td>" + newData.RefSubNets + "</td>"
+                        + "<td>" + newData.RefIPs + "</td>"
+                        + "<td>" + newData.IDN_Domain + "</td>"
+                        + "<td>" + newData.IDN_TLD + "</td>"
+                        + "<td>" + newData.PrevGlobalRank + "</td>"
+                        + "<td>" + newData.PrevTldRank + "</td>"
+                        + "<td>" + newData.PrevRefSubNets + "</td>"
+                        + "<td>" + newData.PrevRefIPs + "</td><tr>";
+                    html += row;
+                }
+
+                $table.append(html); // append data to table
+                offset += 14; // increase offset
+                loading = false; // allow to load next data portions
+
+                calcLazyPoint(); // calc next lazy point
+            }
+
+            // Function with ajax request
+            // it will ask server for new data
+            // using your offset and count
+            function getTableData() {
+                $.get(`http://localhost:8080/${offset}/${offset + count}`, (newData, status) => {
+                    addToTable(newData);
+                    console.log(newData);
+                });
+            }
+
+            $win.on("scroll", function () {
+                var top = $win.scrollTop(); // get scrollTop
+                var height = $win.innerHeight(); // viewport height
+                var scrollPoint = top + height;
+
+                if (scrollPoint > lazyPoint && !loading) {
+                    getTableData(); // ajax request
+                    loading = true; // prevent more than 1 request
+                }
+            });
+
+            // fist start
+            calcLazyPoint();
+        };
+    </script>
+</body>
+
+</html>

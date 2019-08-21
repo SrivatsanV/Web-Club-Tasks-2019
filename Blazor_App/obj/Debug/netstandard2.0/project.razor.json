@@ -197,53 +197,6 @@
       },
       {
         "Kind": "Components.Component",
-        "Name": "Blazor_App.Pages.__generated__FetchData",
-        "AssemblyName": "Blazor_App",
-        "Documentation": null,
-        "TagOutputHint": null,
-        "TagMatchingRules": [
-          {
-            "TagName": "__generated__FetchData",
-            "ParentTag": null,
-            "TagStructure": 0,
-            "Attributes": [],
-            "Diagnostics": []
-          }
-        ],
-        "BoundAttributes": [],
-        "AllowedChildTags": [],
-        "Diagnostics": [],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "Blazor_App.Pages.__generated__FetchData"
-        }
-      },
-      {
-        "Kind": "Components.Component",
-        "Name": "Blazor_App.Pages.__generated__FetchData",
-        "AssemblyName": "Blazor_App",
-        "Documentation": null,
-        "TagOutputHint": null,
-        "TagMatchingRules": [
-          {
-            "TagName": "Blazor_App.Pages.__generated__FetchData",
-            "ParentTag": null,
-            "TagStructure": 0,
-            "Attributes": [],
-            "Diagnostics": []
-          }
-        ],
-        "BoundAttributes": [],
-        "AllowedChildTags": [],
-        "Diagnostics": [],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "Blazor_App.Pages.__generated__FetchData",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "Kind": "Components.Component",
         "Name": "Blazor_App.Shared.MainLayout",
         "AssemblyName": "Blazor_App",
         "Documentation": null,

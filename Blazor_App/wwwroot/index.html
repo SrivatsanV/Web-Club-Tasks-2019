@@ -66,7 +66,7 @@
             // it will ask server for new data
             // using your offset and count
             function getTableData() {
-                $.get(`http://localhost:8080/${offset}/${offset + count}`, (newData, status) => {
+                $.get(`https://million-api-101.herokuapp.com/${offset}/${offset + count}`, (newData, status) => {
                     addToTable(newData);
                     console.log(newData);
                 });

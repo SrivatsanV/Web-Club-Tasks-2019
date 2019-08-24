@@ -21,11 +21,12 @@ app.get("/", (req, res) => {
 
 app.get("/:id1/:id2", async (req, res) => {
   try {
+    let lower = parseInt(req.params.id1);
+    let upper = parseInt(req.params.id2);
     const data = await million
       .find()
-      .skip(parseInt(req.params.id1))
-      .limit(parseInt(req.params.id2));
-    console.log(data);
+      .skip(lower)
+      .limit(lower - upper);
     res.status(200).json(data);
   } catch (err) {
     res.status(404).json({ message: err });

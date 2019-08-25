@@ -13,6 +13,6 @@
 
 ### Usage
 * This api is hosted online : https://million-api-101.herokuapp.com - this simply displays ```index```
-* To fetch records : https://million-api-101.herokuapp.com/<lower-limit>/<upper-limit> where <lower-limit> and <upper-limit> are numbers in range 0 - 1000000
+* To fetch records : https://million-api-101.herokuapp.com/LOWER/UPPER where LOWER and UPPER are numbers in range 0 - 1000000
 
 PS : Only 14 records are being fetched from this api at a given time in the [Blazor_App](https://blazorapp231.z30.web.core.windows.net/fetchdata)

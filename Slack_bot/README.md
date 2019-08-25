@@ -20,10 +20,15 @@
 * Run ```ngrok http 8080``` which exposes our local web server by creating a public url.
 
 ### lyrics_finder.py
-* Follow this [link](https://github.com/Techcatchers/PyLyrics-Extract) for the code and to get your own custome serach engine and the google api key.
+* Follow this [link](https://github.com/Techcatchers/PyLyrics-Extractor) for the code and to get your own custome search engine and the google api key.
 * Store the Google API key and the search engine ID in the .env file.
 * Access these variables in the python script.
 
+### Google API key and Search Engine ID
+* Follow this [link](https://developers.google.com/custom-search/v1/overview) to get your Google API key.
+* Follow this [link](https://cse.google.com/cse/create/new) to create your custome search engine.
+* Click **New Search Engine** and add in links to websites where you can find lyrics (like https://genius.com)
+* After creating the search engine - you can access the **Search engine ID**.
 
 ### Usage
 * Go to your workspace and use the channel that you have specified in the ```body``` variable in ```routes/slack.js```.
